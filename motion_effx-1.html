@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="no-referrer">
+<meta name="color-scheme" content="dark">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'">
+<title>Motion Effx — Secure Media Editing</title>
+<style>
+:root{--bg:#07090d;--card:#10141b;--card2:#151a23;--line:#252c37;--text:#f4f7fb;--muted:#9aa5b4;--green:#83efb0;--green2:#b7ffd2;--danger:#ff7474;--shadow:0 20px 70px #0008}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 80% 5%,#143122 0,transparent 28%),var(--bg);color:var(--text);font:15px/1.55 Inter,system-ui,-apple-system,Segoe UI,sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}
+.nav{position:sticky;top:0;z-index:20;height:72px;padding:0 6%;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:#07090ddd;backdrop-filter:blur(15px)}
+.logo{font-size:23px;font-weight:850;letter-spacing:-1px}.logo span{color:var(--green)}.links{display:flex;gap:25px;color:#aab3c0;font-size:13px}.links a:hover{color:#fff}
+.btn{border:0;border-radius:10px;padding:12px 17px;font-weight:800;background:var(--green);color:#06100a}.btn.dark{background:#1b212b;color:#fff;border:1px solid var(--line)}
+.hero{min-height:690px;padding:95px 7%;display:grid;grid-template-columns:1.25fr .75fr;gap:60px;align-items:center}.tag{display:inline-block;color:var(--green2);border:1px solid #28583f;background:#0d2017;border-radius:999px;padding:6px 10px;font-size:11px;font-weight:800;letter-spacing:1.5px}
+h1{font-size:clamp(52px,8vw,96px);line-height:.92;letter-spacing:-5px;margin:20px 0}.accent{color:var(--green)}.lead{max-width:620px;color:var(--muted);font-size:18px;line-height:1.7}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:28px}
+.heroPanel{background:linear-gradient(145deg,#121820,#0d1016);border:1px solid var(--line);border-radius:22px;padding:27px;box-shadow:var(--shadow)}.panelTitle{color:#727d8d;font-size:10px;letter-spacing:2px;font-weight:800;margin-bottom:18px}.secureStep{padding:17px 0;border-top:1px solid var(--line)}.secureStep b{color:var(--green);margin-right:10px}
+section{max-width:1200px;margin:auto;padding:85px 6%}.heading small{color:var(--green);letter-spacing:2px;font-weight:800}.heading h2{font-size:43px;letter-spacing:-2px;margin:8px 0 35px}
+.prices{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.price{background:var(--card);border:1px solid var(--line);border-radius:16px;color:#fff;text-align:left;padding:23px;min-height:190px}.price:hover,.price.active{border-color:var(--green);transform:translateY(-2px)}.price strong{display:block}.price b{display:block;font-size:35px;margin:17px 0}.price span{color:var(--muted);font-size:13px}
+.formBox{background:var(--card);border:1px solid var(--line);border-radius:22px;padding:30px;max-width:850px;margin:auto}label{display:block;font-size:13px;font-weight:800;margin:0 0 19px}input,select,textarea{width:100%;margin-top:8px;background:#080b10;color:#fff;border:1px solid #303845;border-radius:10px;padding:13px;outline:none}input:focus,select:focus,textarea:focus{border-color:var(--green)}textarea{min-height:155px;resize:vertical}.upload{border:1px dashed #46505d;background:#0b0f14;padding:26px;border-radius:12px;text-align:center}.upload input{border:0;background:transparent}.hint{display:block;color:#758090;font-size:11px;margin-top:8px}.total{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:17px;margin-top:3px}.total b{font-size:24px}.full{width:100%;margin-top:18px}.notice{background:#0b1010;border:1px solid #243b30;border-radius:11px;padding:13px;color:#a9b7ae;font-size:12px;margin-top:15px}.status{min-height:24px;color:var(--green);font-size:13px;margin-top:12px}
+.securityGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.securityCard{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:22px}.securityCard h3{margin:0 0 8px;font-size:16px}.securityCard p{margin:0;color:var(--muted);font-size:13px}.badge{display:inline-block;font-size:10px;padding:4px 7px;border-radius:5px;background:#18251e;color:var(--green);margin-bottom:12px;font-weight:800}
+.policy{display:grid;grid-template-columns:1fr 1fr;gap:15px}.policy article{background:#0d1117;border:1px solid var(--line);border-radius:15px;padding:23px}.policy p{color:var(--muted);font-size:13px}
+footer{border-top:1px solid var(--line);padding:35px 6%;color:#707a88;text-align:center;font-size:12px}
+.modal{display:none;position:fixed;inset:0;background:#000b;z-index:50;place-items:center;padding:20px}.modal.show{display:grid}.modalBox{max-width:520px;width:100%;background:#11161d;border:1px solid var(--line);border-radius:18px;padding:25px}.close{float:right;background:none;border:0;color:#fff;font-size:23px}
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding-top:65px}.prices{grid-template-columns:1fr 1fr}.securityGrid{grid-template-columns:1fr 1fr}.policy{grid-template-columns:1fr}.links{display:none}}
+@media(max-width:520px){.prices,.securityGrid{grid-template-columns:1fr}h1{letter-spacing:-3px}.hero{padding-left:6%;padding-right:6%}}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <a class="logo" href="#">Motion Effx<span>•</span></a>
+  <nav class="links"><a href="#services">Services</a><a href="#submit">Submit</a><a href="#security">Security</a><a href="#policies">Policies</a></nav>
+  <a class="btn" href="#submit">Start an order</a>
+</header>
+
+<main>
+<section class="hero">
+  <div>
+    <span class="tag">SECURE MEDIA EDITING</span>
+    <h1>Send it.<br><span class="accent">We edit it.</span></h1>
+    <p class="lead">Upload your media, explain your vision through the project inbox, and submit your request. Built with a security-first architecture for customers and the business owner.</p>
+    <div class="actions"><a class="btn" href="#submit">Submit a project →</a><a class="btn dark" href="#security">Security measures</a></div>
+  </div>
+  <div class="heroPanel">
+    <div class="panelTitle">PROTECTED WORKFLOW</div>
+    <div class="secureStep"><b>01</b> Customer chooses a service</div>
+    <div class="secureStep"><b>02</b> Media is validated before upload</div>
+    <div class="secureStep"><b>03</b> Instructions stay with the project</div>
+    <div class="secureStep"><b>04</b> Payment is handled by a PCI provider</div>
+    <div class="secureStep"><b>05</b> Private files expire after delivery</div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="heading"><small>SIMPLE PRICING</small><h2>Pick your service</h2></div>
+  <div class="prices">
+    <button class="price" data-service="thumbnail"><strong>Thumbnail</strong><b>$3.30</b><span>YouTube, gaming and social thumbnails</span></button>
+    <button class="price" data-service="video"><strong>Video</strong><b>$8.10</b><span>Full video editing from your footage</span></button>
+    <button class="price" data-service="shorts"><strong>Shorts</strong><b>$4.00</b><span>Vertical short-form content</span></button>
+    <button class="price" data-service="photo"><strong>Photo</strong><b>$3.30</b><span>Retouching and image editing</span></button>
+  </div>
+</section>
+
+<section id="submit">
+  <div class="heading"><small>PROJECT INBOX</small><h2>Tell your editor everything</h2></div>
+  <div class="formBox">
+    <form id="orderForm" autocomplete="off">
+      <label>Service
+        <select id="service" required>
+          <option value="">Choose a service</option><option value="thumbnail">Thumbnail — $3.30</option>
+          <option value="video">Video — $8.10</option><option value="shorts">Shorts — $4.00</option><option value="photo">Photo — $3.30</option>
+        </select>
+      </label>
+      <label>Your name <input id="name" maxlength="80" autocomplete="name" required></label>
+      <label>Email <input id="email" type="email" maxlength="160" autocomplete="email" required></label>
+      <label>Upload media
+        <div class="upload">
+          <input id="file" type="file" accept="image/*,video/*">
+          <strong id="fileName">Choose an image or video</strong>
+          <span class="hint">Browser validation: image/video only, maximum 500 MB. Production uploads should use private signed storage URLs + malware scanning.</span>
+        </div>
+      </label>
+      <label>Editing instructions
+        <textarea id="brief" maxlength="3000" required placeholder="Example: Remove 00:00–00:04, add captions, improve colors, use fast cuts, and export vertically."></textarea>
+        <span class="hint" id="counter">0 / 3000</span>
+      </label>
+      <div class="total"><span>Estimated price</span><b id="total">$0.00</b></div>
+      <div class="notice">🔒 This standalone HTML does not transmit your files or personal data anywhere. It is a secure frontend demo. For a live site, connect authentication, private storage, malware scanning and a PCI-compliant payment provider on the server.</div>
+      <button class="btn full" type="submit">Review & submit request</button>
+      <div class="status" id="status" role="status"></div>
+    </form>
+  </div>
+</section>
+
+<section id="security">
+  <div class="heading"><small>SECURITY LAYER</small><h2>Protection for users & owner</h2></div>
+  <div class="securityGrid">
+    <article class="securityCard"><span class="badge">FILES</span><h3>Private object storage</h3><p>Production media should live in a private bucket. Editors receive short-lived signed access rather than public URLs.</p></article>
+    <article class="securityCard"><span class="badge">MALWARE</span><h3>Upload scanning</h3><p>Every uploaded file should be scanned and validated before it reaches an editor or processing worker.</p></article>
+    <article class="securityCard"><span class="badge">ACCOUNTS</span><h3>MFA & passkeys</h3><p>Protect customer and admin accounts with strong authentication, session expiry, recovery controls and login throttling.</p></article>
+    <article class="securityCard"><span class="badge">PAYMENTS</span><h3>No card storage</h3><p>Use a PCI-compliant payment processor. Your application should never store raw card numbers or CVV data.</p></article>
+    <article class="securityCard"><span class="badge">ABUSE</span><h3>Rate limits & quotas</h3><p>Limit login attempts, requests, upload size, storage use and suspicious activity to reduce abuse and denial-of-service risk.</p></article>
+    <article class="securityCard"><span class="badge">OWNER</span><h3>Admin isolation</h3><p>Use separate admin accounts, least privilege, audit logs, encrypted secrets, backups and alerts for sensitive actions.</p></article>
+    <article class="securityCard"><span class="badge">PRIVACY</span><h3>Retention controls</h3><p>Define how long originals, finished files and project messages are retained, then automatically delete expired data.</p></article>
+    <article class="securityCard"><span class="badge">NETWORK</span><h3>HTTPS & secure headers</h3><p>Production deployment should enforce HTTPS, HSTS, CSP, secure cookies, CSRF protection and strict content handling.</p></article>
+    <article class="securityCard"><span class="badge">MONITORING</span><h3>Audit & incident response</h3><p>Log security events without exposing private media, monitor unusual behavior and maintain a tested breach-response process.</p></article>
+  </div>
+</section>
+
+<section id="policies">
+  <div class="heading"><small>TRUST CENTER</small><h2>Clear rules for everyone</h2></div>
+  <div class="policy">
+    <article><h3>Customer protection</h3><p>Your media should be private by default. Access should be limited to authorized people, and download links should expire. Customers should be able to request deletion according to the site's retention policy.</p></article>
+    <article><h3>Owner protection</h3><p>The owner should not receive raw passwords or card data. Admin access should be isolated, logged and protected by MFA/passkeys, with backups and recovery procedures.</p></article>
+    <article><h3>Content safety</h3><p>Define prohibited uploads, copyright responsibilities, abuse reporting and a process for handling illegal or malicious files before launch.</p></article>
+    <article><h3>Data minimization</h3><p>Only collect information required to fulfill an order. Avoid storing unnecessary identity, payment or device information.</p></article>
+  </div>
+</section>
+</main>
+
+<footer>© 2026 Motion Effx · Security-first media editing marketplace · <button id="privacy" style="background:none;border:0;color:#8e98a6;cursor:pointer">Privacy notice</button></footer>
+
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modalBox">
+    <button class="close" id="close">×</button>
+    <h2>Privacy notice</h2>
+    <p style="color:#aab3c0">This single-file demo performs validation in your browser and does not send uploaded files to a server. A production deployment must publish a complete privacy policy explaining data collection, retention, processors, deletion requests, security practices and applicable legal rights.</p>
+    <p style="color:#aab3c0">Do not place API keys, database passwords, payment secrets or private signing keys in this HTML file.</p>
+  </div>
+</div>
+
+<script>
+"use strict";
+const prices=Object.freeze({thumbnail:3.30,video:8.10,shorts:4.00,photo:3.30});
+const $=id=>document.getElementById(id);
+const service=$("service"), total=$("total"), file=$("file"), status=$("status"), brief=$("brief");
+
+function money(n){return "$"+n.toFixed(2)}
+function updatePrice(){total.textContent=service.value?money(prices[service.value]):"$0.00"}
+service.addEventListener("change",updatePrice);
+
+document.querySelectorAll(".price").forEach(card=>{
+  card.addEventListener("click",()=>{
+    service.value=card.dataset.service;
+    document.querySelectorAll(".price").forEach(x=>x.classList.remove("active"));
+    card.classList.add("active");
+    updatePrice();
+    $("submit").scrollIntoView({behavior:"smooth"});
+  });
+});
+
+brief.addEventListener("input",()=>{$("counter").textContent=brief.value.length+" / 3000"});
+
+file.addEventListener("change",()=>{
+  const f=file.files[0];
+  if(!f){$("fileName").textContent="Choose an image or video";return}
+  const ok=/^(image|video)\//.test(f.type)&&f.size<=500*1024*1024;
+  if(!ok){file.value="";$("fileName").textContent="Invalid file";status.textContent="Please select an image/video no larger than 500 MB.";return}
+  $("fileName").textContent=f.name+" ("+(f.size/1024/1024).toFixed(1)+" MB)";
+  status.textContent="";
+});
+
+$("orderForm").addEventListener("submit",e=>{
+  e.preventDefault();
+  const email=$("email").value.trim(), description=brief.value.trim();
+  if(!service.value){status.textContent="Choose a service.";return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){status.textContent="Enter a valid email.";return}
+  if(description.length<5){status.textContent="Please describe the edit.";return}
+  if(!file.files[0]){status.textContent="Please select a media file.";return}
+  status.textContent="Request validated locally. Connect a secure backend to actually submit, upload and charge the order.";
+});
+
+$("privacy").onclick=()=>{$("modal").classList.add("show");$("modal").setAttribute("aria-hidden","false")}
+$("close").onclick=()=>{$("modal").classList.remove("show");$("modal").setAttribute("aria-hidden","true")}
+$("modal").addEventListener("click",e=>{if(e.target===$("modal"))$("close").click()});
+updatePrice();
+</script>
+</body>
+</html>
